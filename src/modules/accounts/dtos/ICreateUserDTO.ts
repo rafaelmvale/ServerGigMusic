@@ -3,6 +3,7 @@ interface ICreateUserDTO {
   email: string;
   whatsapp: string;
   password: string;
+  id?: string;
   avatar?: string;
 
 }
