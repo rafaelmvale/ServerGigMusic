@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  database_gigmusic:
+    image: postgres
+    container_name: database_gigmusic
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=gigmusic
+      - POSTGRES_DB=gigmusic
+    volumes:
+      - pgdata:/data/postgres
+  app:
+    build: .
+    container_name: gigmusic
+    restart: always
+    ports:
+      - 3333:3333
+    links:
+      - database_gigmusic
+    depends_on:
+      - database_gigmusic
+
+volumes:
+  pgdata:
+    driver: local
