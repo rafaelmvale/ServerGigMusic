@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
-import createConnection from "../../../database/index";
+import createConnection from "@shared/infra/typeorm/index";
 
 
 import "../../container";
 
 
 import { router } from '../http/routes';
-import { AppError } from "../../../errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 
 createConnection();
 const app = express();
