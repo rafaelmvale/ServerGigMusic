@@ -11,7 +11,6 @@ class RestaurantsRepository implements IRestaurantsRepository {
   constructor() {
     this.repository = getRepository(Restaurant);
   }
-
   async create({
     name,
     address,
@@ -40,6 +39,15 @@ class RestaurantsRepository implements IRestaurantsRepository {
 
     return restaurant;
   }
+  
+  async findByUser(user_id: string): Promise<Restaurant[]> {
+    const restaurant = await this.repository.find({
+      where: { user_id },
+      relations: ["restaurant"],
+    });
+    return restaurant;
+  }
+
 
 }
 

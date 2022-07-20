@@ -6,6 +6,7 @@ interface IRestaurantsRepository {
   create(data: ICreateRestaurantDTO): Promise<void>;
   findById(id: string): Promise<Restaurant>;
   findByName(name: string): Promise<Restaurant>;
+  findByUser(user_id: string): Promise<Restaurant[]>;
 }
 
 export { IRestaurantsRepository }
