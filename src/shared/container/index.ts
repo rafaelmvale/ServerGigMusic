@@ -16,6 +16,8 @@ import { IDayPlatesRepository } from '@modules/restaurants/repositories/IDayPlat
 import { DayPlatesRepository } from '@modules/restaurants/infra/typeorm/repositories/DayPlatesRepository';
 import { IDayDrinksRepository } from '@modules/restaurants/repositories/IDayDrinksRepository';
 import { DayDrinksRepository } from '@modules/restaurants/infra/typeorm/repositories/DayDrinksRepository';
+import { IScheduleRepository } from '@modules/schedules/repositories/ISchedulesRepository';
+import { SchedulesRepository } from '@modules/schedules/infra/typeorm/repositories/SchedulesRepository';
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -54,4 +56,9 @@ container.registerSingleton<IDayPlatesRepository>(
 container.registerSingleton<IDayDrinksRepository>(
   "DayDrinksRepository",
   DayDrinksRepository
+)
+
+container.registerSingleton<IScheduleRepository>(
+  "SchedulesRepository",
+  SchedulesRepository
 )
