@@ -12,6 +12,10 @@ import { IRepertoriesRepository } from '@modules/musician/repositories/IRepertor
 import { RepertoriesRepository } from '@modules/musician/infra/typeorm/repositories/RepertoriesRepository';
 import { IMusiciansRepertory } from '@modules/musician/repositories/IMusiciansRepository';
 import { MusiciansRepository } from '@modules/musician/infra/typeorm/repositories/MusiciansRepository';
+import { IDayPlatesRepository } from '@modules/restaurants/repositories/IDayPlateRepository';
+import { DayPlatesRepository } from '@modules/restaurants/infra/typeorm/repositories/DayPlatesRepository';
+import { IDayDrinksRepository } from '@modules/restaurants/repositories/IDayDrinksRepository';
+import { DayDrinksRepository } from '@modules/restaurants/infra/typeorm/repositories/DayDrinksRepository';
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -40,4 +44,14 @@ container.registerSingleton<IRepertoriesRepository>(
 container.registerSingleton<IMusiciansRepertory>(
   "MusiciansRepository",
   MusiciansRepository
+)
+
+container.registerSingleton<IDayPlatesRepository>(
+  "DayPlatesRepository",
+  DayPlatesRepository
+)
+
+container.registerSingleton<IDayDrinksRepository>(
+  "DayDrinksRepository",
+  DayDrinksRepository
 )

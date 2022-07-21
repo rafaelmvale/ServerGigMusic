@@ -1,6 +1,3 @@
-import { Repertory } from "../infra/typeorm/entities/Repertory";
-
-
 interface ICreateMusicianDTO {
   name: string;
   style: string;
