@@ -11,8 +11,8 @@ class ListRestaurantsByUserUseCase {
     private restaurantsRespository: IRestaurantsRepository
   ) {}
 
-  async execute(user_id: string): Promise<Restaurant[]> {
-    const restaurantsUser = await this.restaurantsRespository.findByUser(user_id);
+  async execute(): Promise<Restaurant[]> {
+    const restaurantsUser = await this.restaurantsRespository.list();
 
     return restaurantsUser;
   }

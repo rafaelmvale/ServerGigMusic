@@ -1,6 +1,6 @@
 
 interface ICreateDayPlateDTO {
-  name: string;
+  description: string;
   restaurant_id?: string;
   id?: string;
 }

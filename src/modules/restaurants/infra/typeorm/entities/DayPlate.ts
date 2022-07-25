@@ -10,7 +10,7 @@ class DayPlate {
   id: string;
 
   @Column()
-  name: string;
+  description: string;
   
   @ManyToOne(() => Restaurant)
   @JoinColumn({name: "restaurant_id"})

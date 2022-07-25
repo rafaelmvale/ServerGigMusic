@@ -10,7 +10,7 @@ import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   restaurant_id: string;
-  user_id: string;
+  musician_id: string;
 }
 
 
@@ -40,28 +40,27 @@ class ListSchedulesByUserUseCase {
     private musiciansRepository: IMusiciansRepertory, 
     @inject("RepertoriesRepository")
     private repertoriesRepository: IRepertoriesRepository,
-    @inject("RestaurantsRepository")
-    private restaurantsRepository: IRestaurantsRepository, 
     @inject("DayPlatesRepository")
     private dayPlatesRepository: IDayPlatesRepository,
     @inject("DayDrinksRepository")
     private dayDrinksRepository: IDayDrinksRepository
   ){}
 
-  async execute({restaurant_id, user_id }: IRequest ): Promise<IResponse>{
-    const restaurant = await this.restaurantsRepository.findById(restaurant_id);
-    const musician =  await this.musiciansRepository.findByUser(user_id);
+  async execute({restaurant_id, musician_id }: IRequest ): Promise<IResponse>{
+
+    const musician =  await this.musiciansRepository.findById(musician_id);
+    const repertory = await this.repertoriesRepository.findById(musician.repertory_id);
     const dayPlates = await this.dayPlatesRepository.findByRestaurant(restaurant_id);
     const dayDrinks = await this.dayDrinksRepository.findByRestaurant(restaurant_id);
-    const repertory = await this.repertoriesRepository.findById(musician.repertory_id);
-    const schedule = await this.schedulesRepository.findByUser(user_id);
+    const schedule = await this.schedulesRepository.findOpenScheduleByMusician(musician_id);
 
+    
     
     const scheduleReturn: IResponse = {    
       restaurant: {
         scheduleDate: schedule.schedule_date,
-        drinkDaySuggestion: dayDrinks.name, 
-        restaurantDayPlate: dayPlates.name
+        drinkDaySuggestion: dayDrinks.description, 
+        restaurantDayPlate: dayPlates.description
       }, 
       musician: {
         name: musician.name,

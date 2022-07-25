@@ -2,10 +2,6 @@ import { v4 as uuidV4 } from 'uuid';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Restaurant } from "./Restaurant";
 
-
-
-
-
 @Entity("daydrinks")
 class DayDrink {
 
@@ -13,7 +9,7 @@ class DayDrink {
   id: string;
 
   @Column()
-  name: string;
+  description: string;
   
   @ManyToOne(() => Restaurant)
   @JoinColumn({name: "restaurant_id"})

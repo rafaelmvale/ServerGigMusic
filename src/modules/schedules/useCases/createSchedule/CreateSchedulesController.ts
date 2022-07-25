@@ -1,9 +1,9 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateSchedulesUseCase } from "./CreateSchedulesUseCase";
 
 class CreateSchedulesController {
- async handle(request: Request, reponse: Response): Promise<Response> {
+ async handle(request: Request, response: Response): Promise<Response> {
   const { schedule_date, musician_id } = request.body;
   const { id } = request.user;
 
@@ -12,7 +12,6 @@ class CreateSchedulesController {
   const schedule = await createSchedulesUseCase.execute({
     musician_id, 
     schedule_date, 
-    id: id,
   });
 
   return response.status(201).json(schedule);

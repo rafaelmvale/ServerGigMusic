@@ -1,11 +1,7 @@
+import { ICreateRepertoryDTO } from "@modules/musician/dtos/ICreateRepertoryDTO";
 import { Repertory } from "@modules/musician/infra/typeorm/entities/Repertory";
 import { IRepertoriesRepository } from "@modules/musician/repositories/IRepertoriesRepository";
 import { inject, injectable } from "tsyringe";
-
-
-interface IRequest {
-  name: string;
-}
 
 @injectable()
 class CreateRepertoryUseCase {
@@ -14,10 +10,9 @@ class CreateRepertoryUseCase {
     private repertoriesRepository: IRepertoriesRepository
   ) {}
 
-  async execute({name}: IRequest) : Promise<Repertory> {
+  async execute({name}: ICreateRepertoryDTO) : Promise<void> {
     const repertory = await this.repertoriesRepository.create({name});
 
-    return repertory;
   }
 }
 

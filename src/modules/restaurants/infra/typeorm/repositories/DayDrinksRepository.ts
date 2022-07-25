@@ -11,8 +11,8 @@ class DayDrinksRepository implements IDayDrinksRepository {
     this.repository = getRepository(DayDrink);
   }
 
-  async create({ name, restaurant_id, id }: ICreateDayDrinkDTO): Promise<DayDrink> {
-    const DayDrink = this.repository.create({name, restaurant_id, id});
+  async create({ description, restaurant_id, id }: ICreateDayDrinkDTO): Promise<DayDrink> {
+    const DayDrink = this.repository.create({description, restaurant_id, id});
 
     await this.repository.save(DayDrink);
 
@@ -23,13 +23,17 @@ class DayDrinksRepository implements IDayDrinksRepository {
 
     return DayDrink;
   }
+  
   async findByRestaurant(restaurant_id: string): Promise<DayDrink> {
-    const DayDrink = await this.repository.findOne(restaurant_id);
+    const DayDrink = await this.repository.findOne({
+      where: {restaurant_id}
+    });
+
 
     return DayDrink;
   }
-  async findByName(name: string): Promise<DayDrink> {
-    const DayDrink = await this.repository.findOne(name);
+  async findByName(description: string): Promise<DayDrink> {
+    const DayDrink = await this.repository.findOne(description);
 
     return DayDrink;
   }

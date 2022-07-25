@@ -14,17 +14,16 @@ class SchedulesRepository implements IScheduleRepository {
 
   async findOpenScheduleByMusician(musician_id: string): Promise<Schedule> {
     const openByMusician = await this.repository.findOne({
-      where: { musician_id, schedule_date: null},
+      where: { musician_id },
     });
 
     return openByMusician;
   }
 
-  async create({id, musician_id, schedule_date }: ICreateScheduleDTO): Promise<Schedule> {
+  async create({musician_id, schedule_date }: ICreateScheduleDTO): Promise<Schedule> {
     const schedule = this.repository.create({
+      schedule_date,
       musician_id, 
-      schedule_date, 
-      id
     });
 
     await this.repository.save(schedule);
@@ -37,12 +36,6 @@ class SchedulesRepository implements IScheduleRepository {
 
     return schedule;
   }
-  async findByUser(user_id: string): Promise<Schedule> {
-    const schedule = await this.repository.findOne(user_id);
-
-    return schedule;
-  }
-
 }
 
 export { SchedulesRepository }

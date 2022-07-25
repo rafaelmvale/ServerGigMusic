@@ -1,6 +1,6 @@
 
 interface ICreateDayDrinkDTO {
-  name: string;
+  description: string;
   restaurant_id?: string;
   id?: string;
 }

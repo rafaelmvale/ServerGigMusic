@@ -11,7 +11,7 @@ class CreateRepertoryController {
 
     const repertory = await createRepertoryUseCase.execute({name});
 
-    return response.status(201).json(repertory);
+    return response.status(201).send();
   }
 }
 

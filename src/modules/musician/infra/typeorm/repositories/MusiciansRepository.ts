@@ -10,7 +10,6 @@ class MusiciansRepository implements IMusiciansRepertory {
   constructor(){
     this.repository = getRepository(Musician);
   }
-
   async create({
     name,
     contact,
@@ -31,7 +30,7 @@ class MusiciansRepository implements IMusiciansRepertory {
     })
 
     await this.repository.save(musician);
-
+    
     return musician;
   }
   async findById(id: string): Promise<Musician> {

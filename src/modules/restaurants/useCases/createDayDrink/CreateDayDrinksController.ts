@@ -5,12 +5,12 @@ import { CreateDayDrinkUseCase } from "./CreateDayDrinksUseCase";
 
 class CreateDayDrinkController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, restaurant} = request.body;
+    const { description, restaurant} = request.body;
 
     const createDayDrinkUseCase = container.resolve(CreateDayDrinkUseCase);
 
-    const DayDrink= await createDayDrinkUseCase.create({
-      name, restaurant
+    const DayDrink= await createDayDrinkUseCase.execute({
+      description, restaurant
     });
 
     return response.json(DayDrink);

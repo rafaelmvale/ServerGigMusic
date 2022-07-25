@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { Repertory } from "./Repertory";
 
@@ -28,7 +28,7 @@ class Musician {
   @Column()
   user_id: string;
 
-  @ManyToMany(() => Repertory)
+  @ManyToOne(() => Repertory)
   @JoinColumn({name: "repertory_id"})
   repertory: Repertory;
 

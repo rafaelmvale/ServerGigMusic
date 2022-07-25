@@ -4,7 +4,7 @@ import { inject, injectable } from "tsyringe";
 
 
 interface IRequest {
-  name: string;
+  description: string;
   restaurant: string;
 }
 
@@ -26,24 +26,24 @@ class CreateDayDrinkUseCase {
     private dayDrinksRepository: IDayDrinksRepository
   ){}
 
-  async create({
-    name, 
+  async execute({
+    description, 
     restaurant
   }: IRequest): Promise<IResponse>{
 
     const restaurantExist = await this.restaurantsRepository.findByName(restaurant);
 
     await this.dayDrinksRepository.create({
-      name,
+      description,
       restaurant_id: restaurantExist.id
     });
 
     const dayDrinkReturn: IResponse = {
       dayDrink: {
-        name
+        name: description
       }, 
       restaurant: {
-        name
+        name: restaurant
       }
     }
     return dayDrinkReturn;

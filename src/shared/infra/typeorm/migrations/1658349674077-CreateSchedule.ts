@@ -9,7 +9,7 @@ export class CreateSchedule1658349674077 implements MigrationInterface {
                 columns: [
                     { name: "id", type: "uuid", isPrimary: true },
                     { name: "musician_id", type: "uuid" },
-                    { name: "schedule_date", type: "timestamp", isNullable: true, },
+                    { name: "schedule_date", type: "timestamp" },
                     { name: "created_at", type: "timestamp", default: "now()" },
                     { name: "updated_at", type: "timestamp", default: "now()" },
                 ],

@@ -7,6 +7,7 @@ import { inject, injectable } from "tsyringe";
 
 
 interface IRequest {
+  user_id: string;
   name: string;
   style: string;
   contact: string;
@@ -36,24 +37,24 @@ class CreateMusicianUseCase {
   ){}
 
   async execute({
+    user_id,
     name,
     contact, 
     satisfaction,
-    style
+    style, 
+    repertory
   }: IRequest): Promise<IResponse> {
-    
-    const musician = this.musiciansRepository.findByName(name);
-    if(musician){
-      throw new AppError("Musician already Exists!");
-    }
+   
     const repertoryMusician =  await this.repertoriesRepository.create({
-      name
+      name: repertory
     });
+
     await this.musiciansRepository.create({
       name,
       contact,
       satisfaction,
       style, 
+      user_id,
       repertory_id: repertoryMusician.id
       
     });
@@ -66,7 +67,7 @@ class CreateMusicianUseCase {
         satisfaction, 
       }, 
       repertory: {
-        name
+        name: repertory
       }
     }
     return musicianReturn;

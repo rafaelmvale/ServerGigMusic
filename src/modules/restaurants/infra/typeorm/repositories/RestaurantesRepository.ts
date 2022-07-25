@@ -2,6 +2,7 @@ import { ICreateRestaurantDTO } from "@modules/restaurants/dtos/ICreateRestauran
 import { Restaurant } from "../entities/Restaurant";
 import { IRestaurantsRepository } from "@modules/restaurants/repositories/IRestaurantsRepository";
 import { getRepository, Repository } from "typeorm";
+import { throws } from "assert";
 
 
 
@@ -30,12 +31,15 @@ class RestaurantsRepository implements IRestaurantsRepository {
 
     await this.repository.save(restaurant);
   }
-  findById(id: string): Promise<Restaurant> {
-    const restaurant = this.repository.findOne(id);
+
+
+  
+  async findById(id: string): Promise<Restaurant> {
+    const restaurant = await this.repository.findOne(id);
     return restaurant;
   }
-  findByName(name: string): Promise<Restaurant> {
-    const restaurant = this.repository.findOne({name});
+  async findByName(name: string): Promise<Restaurant> {
+    const restaurant = await this.repository.findOne({name});
 
     return restaurant;
   }
@@ -47,6 +51,15 @@ class RestaurantsRepository implements IRestaurantsRepository {
     });
     return restaurant;
   }
+
+  
+  async list(): Promise<Restaurant[]> {
+    const restaurants = await this.repository.find();
+
+    return restaurants;
+    
+  }
+
 
 
 }

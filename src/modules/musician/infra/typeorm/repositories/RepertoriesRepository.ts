@@ -17,11 +17,14 @@ class RepertoriesRepository implements IRepertoriesRepository {
       await this.repository.save(repertory);
 
       return repertory;
+
   }
 
 
 
   async findById(id: string): Promise<Repertory> {
+
+    
     const repertory = await this.repository.findOne(id);
 
     return repertory;

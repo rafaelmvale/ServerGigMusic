@@ -1,7 +1,7 @@
 
 interface ICreateScheduleDTO {
   musician_id?: string;
-  schedule_date?: Date;
+  schedule_date: Date;
   id?: string;
 
 }

@@ -7,7 +7,6 @@ import { inject, injectable } from "tsyringe";
 
 
 interface IRequest { 
-  id: string;
   musician_id: string;
   schedule_date: Date;
 }
@@ -17,41 +16,18 @@ class CreateSchedulesUseCase {
   constructor(
     @inject("SchedulesRepository")
     private schedulesRepository: IScheduleRepository,
-    @inject("DayjsDateProvider")
-    private dateProvider: IDateProvider,
     @inject("MusiciansRepository")
     private musiciansRepository: IMusiciansRepertory
   ){}
 
   async execute({
-    id, 
-    musician_id, 
-    schedule_date
+    schedule_date,
+    musician_id 
   }: IRequest): Promise<Schedule>{
-    const minimumHour = 24;
-
-    const musicianUnavailable = await this.schedulesRepository.findOpenScheduleByMusician(id);
-
-    if(musicianUnavailable){
-      throw new AppError("Musician is unavailable");
-    }
-
-    const dateNow = this.dateProvider.dateNow();
-
-    const compare = this.dateProvider.compareInHours(
-      dateNow, 
-      schedule_date,
-    );
-
-
-    if( compare > minimumHour ){
-      throw new AppError("Invalid return time!");
-    }
 
     const schedule = await this.schedulesRepository.create({
-      id, 
-      musician_id, 
-      schedule_date
+      schedule_date,
+      musician_id 
     });
 
     return schedule;

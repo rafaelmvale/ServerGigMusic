@@ -12,6 +12,7 @@ class CreateMusicianController {
       satisfaction,
       repertory
     } = request.body;
+    const { id } = request.user;
 
     const createMusicianUseCase = container.resolve(CreateMusicianUseCase);
 
@@ -20,6 +21,7 @@ class CreateMusicianController {
       style,
       contact,
       satisfaction,
+      user_id: id,
       repertory
     });
 

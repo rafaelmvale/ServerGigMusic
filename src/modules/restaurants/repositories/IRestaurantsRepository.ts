@@ -7,6 +7,7 @@ interface IRestaurantsRepository {
   findById(id: string): Promise<Restaurant>;
   findByName(name: string): Promise<Restaurant>;
   findByUser(user_id: string): Promise<Restaurant[]>;
+  list():Promise<Restaurant[]>;
 }
 
 export { IRestaurantsRepository }

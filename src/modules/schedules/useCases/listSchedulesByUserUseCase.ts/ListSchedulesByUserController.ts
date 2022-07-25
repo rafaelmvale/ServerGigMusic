@@ -6,14 +6,13 @@ import { ListSchedulesByUserUseCase } from "./ListSchedulesByUserUseCase";
 
 class ListSchedulesByUserController { 
   async handle(request: Request, response: Response): Promise<Response>{
-    const { id: user_id } = request.user;
-    const { restaurant_id } = request.params;
+    const { restaurant_id, musician_id } = request.body;
 
     const listSchedulesByUserUseCase = container.resolve(ListSchedulesByUserUseCase);
 
     const schedule = await listSchedulesByUserUseCase.execute({
       restaurant_id,
-      user_id,
+      musician_id
     });
 
     return response.status(200).json(schedule);
